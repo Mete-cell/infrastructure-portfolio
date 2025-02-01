@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: demo-app
-        image: metecell/demo-app:v2
+        image: metecell/demo-app:v3
         ports:
         - containerPort: 3000
         resources:
