@@ -15,7 +15,7 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 25    # Von 50% auf 25% reduziert
+        averageUtilization: 20    # Von 50% auf 20% reduziert
   - type: Resource
     resource:
       name: memory
