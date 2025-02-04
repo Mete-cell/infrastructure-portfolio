@@ -22,3 +22,8 @@ spec:
       target:
         type: Utilization
         averageUtilization: 50
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300    # 5 Minuten warten vor dem Herunterskalieren
+    scaleUp:
+      stabilizationWindowSeconds: 60     # 1 Minute warten vor dem Hochskalieren
