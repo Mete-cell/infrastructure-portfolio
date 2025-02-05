@@ -10,103 +10,7 @@ A modern DevOps infrastructure project demonstrating IaC, GitOps, monitoring, an
 - Horizontal Pod Autoscaling
 - Automated alerting system with Slack integration
 
-```
-flowchart TB
-    %% AWS Cloud
-    subgraph AWS["AWS Cloud"]
-        direction TB
-
-        %% VPC-Bereich
-        subgraph VPC["VPC"]
-            direction TB
-
-            %% Public Subnets
-            subgraph Public["Public Subnets"]
-                direction LR
-                LB["Load Balancer"]
-                NAT["NAT Gateway"]
-            end
-
-            %% Private Subnets
-            subgraph Private["Private Subnets"]
-                direction TB
-
-                %% EKS Cluster
-                subgraph EKS["EKS Cluster"]
-                    direction LR
-
-                    %% Control Plane
-                    subgraph Control["Control Plane"]
-                        direction TB
-                        API["API Server"]
-                        MS["Metrics Server"]
-                    end
-
-                    %% Worker Nodes
-                    subgraph Workers["Worker Nodes"]
-                        direction TB
-                        
-                        %% Application Pods
-                        subgraph Apps["Application Pods"]
-                            direction LR
-                            Pod1["Demo App Pod 1"]
-                            Pod2["Demo App Pod 2"]
-                        end
-                        
-                        %% Monitoring
-                        subgraph Monitor["Monitoring"]
-                            direction LR
-                            Prom["Prometheus"]
-                            Graf["Grafana"]
-                        end
-                        
-                        %% Continuous Deployment
-                        subgraph CD["Continuous Deployment"]
-                            direction TB
-                            Argo["ArgoCD"]
-                        end
-                        
-                        HPA["Horizontal Pod Autoscaler"]
-                    end
-                end
-            end
-        end
-        
-        IAM["IAM Roles/Policies"]
-        SG["Security Groups"]
-    end
-
-    %% Externe Dienste
-    subgraph External["External Services"]
-        direction LR
-        GitHub["GitHub Repository"]
-        DockerHub["Docker Hub"]
-        Slack["Slack Workspace"]
-        Users["Users"]
-    end
-
-    %% Verbindungen
-    Users -->|Access Application| LB
-    LB -->|Route Traffic| Apps
-
-    GitHub -->|Pull Config| Argo
-    Argo -->|Deploy| Apps
-    DockerHub -->|Pull Images| Workers
-
-    Prom -->|Collect Metrics| Apps
-    MS -->|Provide Metrics| HPA
-    Graf -->|Query Metrics| Prom
-    Graf -->|Send Alerts| Slack
-
-    HPA -->|Scale| Apps
-
-    IAM -.->|Permissions| EKS
-    SG -.->|Network Security| VPC
-
-    %% Legende: dashed lines represent indirect/mediated relationships
-    classDef dashed stroke-dasharray: 5 5;
-    class IAM,SG dashed;
-```
+![Architecture Overview](docs/mermaid-diagram.svg)
 
 ## Technologies Used
 
@@ -131,11 +35,9 @@ infrastructure-portfolio/
 ├── kubernetes/         # Kubernetes manifests
 │   ├── base/          # Base configurations
 │   └── overlays/      # Environment-specific configs
-├── monitoring/        # Monitoring configuration
-├── terraform/        # Infrastructure as Code
-│   ├── modules/     # Reusable Terraform modules
-│   └── environments/# Environment configurations
-└── docs/           # Documentation
+└── terraform/        # Infrastructure as Code
+ 	├── modules/     # Reusable Terraform modules
+    └── environments/# Environment configurations
 ```
 
 ## Prerequisites
@@ -168,7 +70,7 @@ AWS_DEFAULT_REGION=eu-central-1
 ### 1. Infrastructure Setup
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/infrastructure-portfolio.git
+git clone https://github.com/Mete-cell/infrastructure-portfolio.git
 cd infrastructure-portfolio
 
 # Initialize Terraform
