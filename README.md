@@ -36,7 +36,7 @@ infrastructure-portfolio/
 │   ├── base/          # Base configurations
 │   └── overlays/      # Environment-specific configs
 └── terraform/        # Infrastructure as Code
- 	├── modules/     # Reusable Terraform modules
+    ├── modules/     # Reusable Terraform modules
     └── environments/# Environment configurations
 ```
 
